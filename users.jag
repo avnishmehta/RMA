@@ -1,0 +1,24 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var caramel;
+var log = new Log();
+var dbt = require('modules/dbcon.js');
+var verb = request.getMethod();
+var usersess = session.get('login');
+var username = usersess.email;
+var db = new Database("rmadb");
+var qury = db.query("select * from createuser;");
+var len = qury.length.toString();
+
+if(verb == 'GET'){
+	caramel = require('caramel');
+	caramel.render({
+		'title':{text:'Tickets'},
+		'userheader':{username:username},
+		'sidenav':{},
+		'users':{user:qury}
+	});
+}
+
+%>

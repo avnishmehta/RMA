@@ -1,0 +1,36 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var caramel;
+var db = new Database("rmadb");
+var verb = request.getMethod();
+var usersess = session.get('login');
+var username = usersess.email;
+
+if(verb == 'GET'){
+
+}else if(verb == 'POST'){
+
+var macnum = request.getParameter('macnum');
+var wtydate = request.getParameter('wtydate');
+var wtysta = request.getParameter('wtysta');
+var ownm = request.getParameter('ownm');
+
+var rannum = Math.floor(Math.random() * 1000000);
+var randomnum = rannum.toString().slice(0,6);
+
+caramel = require('caramel');
+caramel.render({
+	'title':{text:'RMA Ticket'},
+	'userheader':{username:username},
+	'sidenav':{},
+	'rmagen':{
+		Ownername:ownm,
+		Machinenumber:macnum,
+		Warrantydate:wtydate,
+		Warrantystatus:wtysta,
+		rmanumber:randomnum
+	}
+	});
+}
+%>

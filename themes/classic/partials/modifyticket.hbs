@@ -1,0 +1,55 @@
+<form name="c_up_rma" method="post" action="editticket.jag" id="c_update_rma_i" class="form-horizontal" role="form">
+
+	<div class="form-group" id="up_rma">
+
+		<label for="rmanum" class="col-md-4 control-label">RMA number : </label>
+
+		<div class="col-md-5">
+
+			<input type="text" name="rmama" class="form-control" id="rmama_i" placeholder="Enter RMA number " /><span id="errrmama" class="error"></span>
+
+		</div>
+
+	</div>
+
+	<div class="form-group" id="rma_up">
+
+		<div class="col-md-offset-5">
+
+			<button type="button" class="btn btn-default" id="rma_up_but_i" name="uprma">Modify</button>
+
+		</div>
+
+	</div>
+
+</form>
+<script type="text/javascript">
+$("#rmama_i").val("");
+
+	$("#rma_up_but_i").click(function (e){
+
+		var ooo = $("#rmama_i");
+		function checkrmanumber()
+		{
+			var pattern = /^([a-zA-Z0-9]{2,})$/;
+			var ans = pattern.test(ooo.val());
+			if(ans == true)
+			{
+				return true;
+			}
+			else
+			{
+				e.preventDefault();
+				$("#errrmama").html("<font color='red'>Invalid RMA Number</font>");
+				$("#errrmama").val("");
+				return false;
+			}
+		}
+
+		if(checkrmanumber())
+		{
+			$('#c_update_rma_i').submit();
+		}
+
+	});
+</script>

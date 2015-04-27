@@ -1,0 +1,44 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var caramel;
+var dbt = require('modules/dbcon.js');
+var log = new Log();
+var usersess = session.get('login');
+var username = usersess.email;
+var verb = request.getMethod();
+if(verb == 'GET'){
+caramel = require('caramel');
+caramel.render({
+	'title':{text:'New User'},
+	'userheader':{username:username},
+	'sidenav':{},
+	'newuser':{}
+});
+}else if(verb == 'POST'){
+	var comp_name = request.getParameter('cname');
+	var frst_name = request.getParameter('fname');
+	var lst_name = request.getParameter('lname');
+	var country_cod = request.getParameter('country_code');
+	var phon = request.getParameter('phone');
+	var addr = request.getParameter('address');
+	var pozip = request.getParameter('postalcode');
+	var mail = request.getParameter('email');
+	var pwd = request.getParameter('pass');
+
+	var db = new Database("rmadb");
+	try{
+		var data = db.query("insert into createuser(company_name, first_name, last_name, country_code, phone, address, postalcode, email, password) values ('"+comp_name+"', '"+frst_name+"', '"+lst_name+"', '"+country_cod+"', '"+phon+"', '"+addr+"', '"+pozip+"', '"+mail+"','"+pwd+"')");
+		db.query(data);
+		log.info("User Successfully Added");
+	} catch(e)
+	    {
+			print(e.toString());
+			log.error("Error Occured while inserting new user details");
+	    } finally
+		    {
+			    db.close()
+		    }
+	response.sendRedirect("users.jag");
+}
+%>

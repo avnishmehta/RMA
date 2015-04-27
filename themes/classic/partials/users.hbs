@@ -1,0 +1,48 @@
+<div id="usertable" class="table-responsive">
+	<table class="table table-bordered table-striped table-hover ">
+	<tr>
+		<th>Sr.No</th>
+		<th>Company Name</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Country Code</th>
+		<th>Phone</th>
+		<th>Address</th>
+		<th>Postal Code</th>
+		<th>Email</th>
+	</tr>
+	<tr>
+{{#each user}}
+	<tr>
+		<td>
+			{{this.id}}
+		</td>
+		<td>
+			{{this.company_name}}
+		</td>
+		<td>
+			{{this.first_name}}
+		</td>
+		<td>
+			{{this.last_name}}
+		</td>
+		<td>
+			{{this.phone}}
+		</td>
+		<td>
+			{{this.country_code}}
+		</td>
+		<td>
+			{{this.address}}
+		</td>
+		<td>
+			{{this.postalcode}}
+		</td>
+		<td>
+			{{this.email}}
+		</td>
+	</tr>
+{{/each}}
+	</tr>
+	</table>
+</div>

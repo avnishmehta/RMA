@@ -1,0 +1,43 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var verb = request.getMethod();
+var dbt = require('modules/dbcon.js');
+var db = new Database("rmadb");
+var caramel = require('caramel');
+var log = new Log();
+var usersess = session.get('login');
+var username = usersess.email;
+if(verb == "POST")
+{
+	var rmatoupdate = request.getParameter("rmama");
+	var objobj = db.query("select * from user_submits where rma_number='"+rmatoupdate+"';");
+
+	for(i in objobj)
+	{
+		var avi_i = (objobj[i].id).toString();		
+		var avi_rma_number = (objobj[i].rma_number).toString();
+		var avi_first_name = (objobj[i].first_name).toString();
+		var avi_last_name = (objobj[i].last_name).toString();
+		var avi_machineowner = (objobj[i].machineowner).toString();
+		var avi_machinenumber = (objobj[i].machinenumber).toString();
+		var avi_warrantydate = (objobj[i].warrantydate).toString();
+		var avi_warrantystatus = (objobj[i].warrantystatus).toString();
+		var avi_priority = (objobj[i].priority).toString();
+		var avi_email = (objobj[i].email).toString();
+		var avi_subject = (objobj[i].subject).toString();
+		var avi_message = (objobj[i].message).toString();
+	}
+
+	caramel.render({
+	'title':{text:'RMA Modify'},
+	'userheader':{username:username},
+	'sidenav':{},
+	'editticket':{
+			ai:avi_i, arn:avi_rma_number, afn:avi_first_name, aln:avi_last_name, amo:avi_machineowner, amn:avi_machinenumber, awd:avi_warrantydate, aws:avi_warrantystatus, ap:avi_priority, ae:avi_email, asub:avi_subject, amsg:avi_message
+		}
+	});
+}
+
+
+%>

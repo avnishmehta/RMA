@@ -1,0 +1,59 @@
+<div id="usertable" class="table-responsive">
+	<table class="table table-bordered table-striped table-hover ">
+	<tr>
+		<th>id</th>
+		<th>RMA number</th>
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Machine Owner</th>
+		<th>Machine No</th>
+		<th>Warranty Status</th>
+		<th>Warranty Date</th>
+		<th>Priority</th>
+		<th>Subject</th>
+		<th>Message</th>
+	</tr>
+	<tr>
+{{#each view}}
+	<tr>
+		<td>
+			{{this.id}}
+		</td>
+		<td>
+			{{this.rma_number}}
+		</td>
+		<td>
+			{{this.first_name}}
+		</td>
+		<td>
+			{{this.last_name}}
+		</td>
+		<td>
+			{{this.machineowner}}
+		</td>
+		<td>
+			{{this.machinenumber}}
+		</td>
+		<td>
+			{{this.warrantystatus}}
+		</td>
+		<td>
+			{{this.warrantydate}}
+		</td>
+		<td>
+			{{this.priority}}
+		</td>
+		<td>
+			{{this.email}}
+		</td>
+		<td>
+			{{this.subject}}
+		</td>
+		<td>
+			{{this.message}}
+		</td>
+	</tr>
+{{/each}}
+	</tr>
+	</table>
+</div>

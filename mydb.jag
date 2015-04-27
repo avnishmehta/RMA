@@ -1,0 +1,5 @@
+<%
+var db = new Database("rmadb");
+var res = db.query("Select * from createuser");
+
+%>

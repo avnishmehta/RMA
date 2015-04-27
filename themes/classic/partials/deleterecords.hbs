@@ -1,0 +1,147 @@
+<form name="delete" method="post" id="deletei" class="form-horizontal" role="form">
+	<div class="form-group">
+		<label for="search" class="col-md-4 control-label">Delete By : </label>
+		<div class="col-md-5">
+			<select name="searchby" class="selectpicker btn dropdown-toggle selectpicker btn-default" id="selectpickerid" data-toggle="dropdown">
+			<option value="a">Compay Name</option>
+			<option value="b">RMA Number</option>
+			<option value="c">Machine Sr Number</option>
+			</select>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#selectpickerid").change(function(){
+	    $("#selectpickerid option:selected").each(function(){
+	        if($(this).attr("value")=="a"){
+		    $("#deleteii").hide();
+		    $("#deletepi").hide();
+		    $("#deleteci").show();
+		}
+	        if($(this).attr("value")=="b"){
+		    $("#deleteci").hide();
+		    $("#deletepi").hide();
+		    $("#deleteii").show();
+		}
+	        if($(this).attr("value")=="c"){
+	            $("#deleteci").hide();
+	            $("#deleteii").hide();
+	            $("#deletepi").show();
+	        }
+	    });
+
+	}).change();
+});
+</script>
+<form name="deletecompanyname" method="post" action="del.jag" id="deleteci" class="form-horizontal" role="form">
+	<div class="form-group" id="compan">
+		<label for="companyname" class="col-md-4 control-label">Company Name : </label>
+		<div class="col-md-5">
+			<input type="text" name="name" class="form-control" id="companynamei" placeholder="Enter Company Name" /><span id="errcompany" class="error"></span>
+			<input type="hidden" name="type" value="company"/>
+		</div>
+	</div>
+	<div class="form-group" id="compandelet">
+		<div class="col-md-offset-4">
+			<button type="button" class="btn btn-default" id="companybuti" name="deletename">Delete</button>
+		</div>
+	</div>
+</form>
+<form name="deletermanumber" method="post" action="del.jag" id="deleteii" class="form-horizontal" role="form">
+	<div class="form-group" id="invoic">
+		<label for="rmanumber" class="col-md-4 control-label">RMA Number</label>
+		<div class="col-md-5">
+			<input type="text" name="name" class="form-control" id="rmanumberi" placeholder="Enter RMA number" />
+			<span id="errrmanumber" class="error"></span>
+			<input type="hidden" name="type" value="rma"/>
+		</div>
+	</div>
+	<div class="form-group" id="compandelet">
+		<div class="col-md-offset-4">
+			<button type="button" class="btn btn-default" id="invoicebuti" name="deletename">Delete</button>
+		</div>
+	</div>
+</form>
+<form name="deletepurchasedate" method="post" action="del.jag" id="deletepi" class="form-horizontal" role="form">
+	<div class="form-group" id="purchas">
+		<label for="purchasenumber" class="col-md-4 control-label">Machine Sr Number : </label>
+		<div class="col-md-5">
+			<input type="text" name="name" class="form-control" id="purchasei" placeholder="Enter Machine Serial Number" />
+			<span id="errpurchasedate" class="error"></span>
+			<input type="hidden" name="type" value="machine"/>
+		</div>
+	</div>
+	<div class="form-group" id="compandelet">
+		<div class="col-md-offset-4">
+			<button type="button" class="btn btn-default" id="purchasebuti" name="deletename">Delete</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+$(document).ready(function (){
+$("#companynamei,#rmanumberi,#purchasei").val("");
+$("#companybuti").click(function (e){
+	var objcompanyname = $("#companynamei");
+	function checkcompanyname(){
+		var pattern = /^([a-zA-Z0-9]{2,})$/;
+		var ans = pattern.test(objcompanyname.val());
+		if(ans == true){
+			return true;
+		}else{
+			e.preventDefault();
+			$("#errcompany").html("<font color='red'>Invalid Company Name</font>");
+			$("#errcompany").val("");
+			return false;
+		}
+	}
+	if(checkcompanyname()){
+		$('#deleteci').submit();
+	}
+});
+
+$("#invoicebuti").click(function (e){
+	e.preventDefault();
+	$(".error").html("");
+	var s = $("#selectpickerid").val();
+	var objrmanumber = $("#rmanumberi");
+	function checkrmanumber(){
+		var pattern = /^([a-zA-Z0-9]{2,})$/;
+		var ans = pattern.test(objrmanumber.val());
+		if(ans == true){
+			return true;
+		}else{
+			e.preventDefault();
+			$("#errrmanumber").html("<font color='red'>Invalid RMA Number</font>");
+			$("#errrmanumber").val("");
+			return false;
+		}
+	}
+	if(checkrmanumber()){
+		$('#deleteii').submit();
+	}
+});
+$("#purchasebuti").click(function (e){
+	e.preventDefault();
+	$(".error").html("");
+	var s = $("#selectpickerid").val();
+	var objpurchasenumber = $("#purchasei");
+	function checkpurchasenumber(){
+		/*var pattern = /^([0-9]{4})-([0-9]{2})-([0-9]{2})$/;*/
+		var pattern = /^([a-zA-Z0-9]{2,})$/;
+		var ans = pattern.test(objpurchasenumber.val());
+		if(ans == true){
+			return true;
+		}else{
+			e.preventDefault();
+			$("#errpurchasedate").html("<font color='red'>Enter Date in yyyy-mm-dd format</font>");
+			$("#errpurchasedate").val("");
+			return false;
+		}
+	}
+	if(checkpurchasenumber()){
+		$('#deletepi').submit();
+	}
+});
+});
+</script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<title>Login</title>
+
+<link href="themes/classic/css/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="themes/classic/css/mystyles.css" rel="stylesheet" />
+
+<script type="text/javascript" src="themes/classic/js/jquery-2.1.3.min.js"></script>
+<script type="text/javascript" src="themes/classic/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="themes/classic/js/login.js"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+{{include header}}
+<section>
+<div class="row col-md-12" id="content">
+	<form name="wtlogin" method="post" action="login.jag" class="form-horizontal" id="wtlogini" role="form" style="margin-top:40px;">
+		<div class="form-group">
+			<label for="email" class="col-md-5 control-label">Email</label>
+				<div class="col-md-4">
+					<input type="text" name="username" class="form-control" id="usernamei" placeholder="Enter Email" required>
+					<span id="erruname" class="error"></span>
+				</div>
+		</div>
+		<div class="form-group">
+			<label for="password" class="col-md-5 control-label">Password</label>
+				<div class="col-md-4">
+					<input type="password" name="password" class="form-control" id="passwordi" placeholder="Enter Password" required>
+					<span id="errpwd" class="error"></span>
+				</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-6">
+				<button type="button" name="Login" value="Login" id="loginid" class="btn btn-default">Log in</button>
+				<!--<button type="" name="" value="" id="loginid" class="btn btn-default">Cutomer Registration</button>-->
+			</div>
+		</div>
+	</form>
+{{include footer}}
+</div>
+</section>
+</body>
+</html>

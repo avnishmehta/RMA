@@ -1,0 +1,43 @@
+<form name="viewwarrantyfrm" method="post" action="checkwarranty.jag" id="viewwarrantyfrmi" class="form-horizontal" role="form">
+	<div class="form-group">
+		<label for="machine no" class="col-md-4 control-label">Machine No :</label>
+		<div class="col-md-5">
+			<input type="text" name="machinenumberr" class="form-control" id="machinenumberri" placeholder="Enter Machine Sr No " /><span id="errmname" class="error"></span>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="col-md-offset-5">
+			<button type="submit" class="btn btn-default" name="submit" value="Check" id="submiti">Check</button>
+		</div>
+	</div>
+</form>
+<script type="text/javascript">
+$("#machinenumberri").val("");
+
+	$("#submiti").click(function (e){
+
+		var ooo = $("#machinenumberri");
+		function checkmachinenumber()
+		{
+			var pattern = /^([a-zA-Z0-9]{2,})$/;
+			var ans = pattern.test(ooo.val());
+			if(ans == true)
+			{
+				return true;
+			}
+			else
+			{
+				e.preventDefault();
+				$("#errmname").html("<font color='red'>Invalid Machine Number</font>");
+				$("#errmname").val("");
+				return false;
+			}
+		}
+
+		if(checkmachinenumber())
+		{
+			$('#viewwarrantyfrmi').submit();
+		}
+
+	});
+</script>

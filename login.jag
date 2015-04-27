@@ -1,0 +1,43 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var caramel;
+caramel = require('caramel');
+var dbt = require('modules/dbcon.js');
+var log = new Log();
+var verb = request.getMethod();
+(function () {
+	if(verb=='GET'){
+		caramel = require('caramel');
+		caramel.render({
+			'location':{
+			'redirectlink':request.getQueryString()
+		}
+		});
+	}
+	if(verb=='POST'){
+		var username = request.getParameter("username");
+		var password = request.getParameter("password");
+
+		var db = new Database("rmadb");
+		var q = db.query("Select * from createuser where email = '"+username+"' and password = '"+password+"';");
+		for(a in q){
+			var email = q[a].email;
+			var pwd = q[a].password;
+		}
+		var ver_pwd_q = db.query("select password from createuser where email = '"+email+"';");
+		for(a in ver_pwd_q){
+			var mirror_value = ver_pwd_q[a].password;
+		}
+		if(pwd == mirror_value){
+			var login_ses = { name:"login", email:email };
+			session.put("login", login_ses);
+			var c = session.get("login");
+			application.put('bar', {'name': email});
+			response.sendRedirect("home.jag");
+		}else{
+			response.sendRedirect("login.jag");
+		}
+	}
+}());
+%>

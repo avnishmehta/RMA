@@ -1,0 +1,80 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var db = new Database("rmadb");
+var verb = request.getMethod();
+var usersess = session.get('login');
+var username = usersess.email;
+if (verb == 'GET'){
+caramel = require('caramel');
+caramel.render({
+	'title':{text:'Warranty Check'},
+	'header':{},
+	'sidenav':{},
+	'checkwarranty':{}	
+	});
+}else if(verb == 'POST'){
+
+var macc = request.getParameter('machinenumberr');
+var macno = db.query("select machine_sr_no,warranty_date from warrantydate where machine_sr_no = '"+macc+"';");
+var own = db.query("select cust_name from warrantydate where machine_sr_no = '"+macc+"';");
+for(i in own)
+{
+	var ownname = (own[i].cust_name).toString();
+}
+
+for(i in macno)
+{
+	var abc = (macno[i].warranty_date).toString();
+}
+
+var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1;
+var yyyy = today.getFullYear();
+
+if(dd < 10)
+{
+	    dd = '0'+ dd;
+}
+
+if(mm < 10) 
+{
+	  	mm = '0' + mm;
+}
+
+today = yyyy+'-'+mm+'-'+dd;
+
+if(abc>today)
+{
+	var status = "Machine is in warranty";
+	var bool = true;
+	var but = "Create RMA";
+	
+}
+else if(abc<today)
+{
+	var status = "Warranty Expired";
+	var bool = false;
+	var but = "Create RMA with paid Service";
+}
+var ses_object = { name : "rmainfo"	, Machinenumber : macc, Ownername : ownname, Warrantydate : abc, Warrantystatus : status, Buttonval:but };
+session.put("rmainfo", ses_object);
+var o = session.get("rmainfo");
+
+caramel = require('caramel');
+caramel.render({
+	'title':{text:'Warranty Check'},
+	'userheader':{username:username},
+	'sidenav':{},
+	'checkwarranty':{
+		Ownername:ownname,
+		Machinenumber:macc,
+		Warrantydate:abc,
+		Warrantystatus:status,
+		Buttonval:but
+	}
+});
+
+}
+%>

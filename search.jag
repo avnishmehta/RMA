@@ -1,0 +1,18 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var verb = request.getMethod();
+var dbt = require('modules/dbcon.js');
+var db = new Database("rmadb");
+var caramel = require('caramel');
+var log = new Log();
+var usersess = session.get('login');
+var username = usersess.email;
+caramel.render({
+	'title':{text:'Search'},
+	'userheader':{username:username},
+	'sidenav':{},
+	'search':{}
+});
+
+%>

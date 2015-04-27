@@ -1,0 +1,31 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+	var rmanumberid = request.getParameter('rmaamr');
+	var frst_name = request.getParameter('fname');
+	var lst_name = request.getParameter('lname');
+	var machineowner = request.getParameter('ownernm');
+	var machineno = request.getParameter('mnum');
+	var warrantydate = request.getParameter('wtydt');
+	var warrantystatus = request.getParameter('wtyst');
+	var priority = request.getParameter('prioritycls');
+	var mail = request.getParameter('email');
+	var sub = request.getParameter('subject');
+	var msg = request.getParameter('ticketmessage');
+	var log = new Log();
+	var db = new Database("rmadb");
+	var caramel = require('caramel');
+	var dbt = require('modules/dbcon.js');
+	var data = "insert into user_submits(rma_number, first_name, last_name, machineowner, machinenumber, warrantydate, warrantystatus, priority, email, subject, message) values ('"+rmanumberid+"', '"+frst_name+"', '"+lst_name+"', '"+machineowner+"', '"+machineno+"', '"+warrantydate+"', '"+warrantystatus+"', '"+priority+"',  '"+mail+"', '"+sub+"', '"+msg+"')";
+	try{
+		db.query(data);
+		log.info("Success");
+	} catch(e){
+		log.error("Error inserting to db");
+		response.sendRedirect("error.jag");
+		} finally{
+				db.close();
+			}
+response.sendRedirect('home.jag');
+
+%>

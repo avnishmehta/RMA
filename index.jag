@@ -1,0 +1,12 @@
+<%
+var caramel = require('caramel');
+var log = new Log();
+var verb = request.getMethod();
+
+caramel.render({
+	'title':{},
+	'header':{},
+	'sidenavi':{},
+	'main':{}
+})
+%>

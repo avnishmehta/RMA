@@ -1,0 +1,15 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var db = new Database("rmadb");
+var verb = request.getMethod();
+var usersess = session.get('login');
+var username = usersess.email;
+caramel = require('caramel');
+caramel.render({
+	'title':{text:'View Warranty'},
+	'userheader':{username:username},
+	'sidenav':{},
+	'viewwarranty':{}
+});
+%>

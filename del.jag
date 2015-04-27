@@ -1,0 +1,40 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var log = new Log();
+var db = new Database("rmadb");
+var caramel = require('caramel');
+var dbt = require('modules/dbcon.js');
+var usersess = session.get('login');
+var username = usersess.email;
+
+var value = request.getParameter('name');
+var type= request.getParameter('type');
+
+if(type=='company'){
+	try{
+		var st = db.query("delete from user_submits where machineowner='"+value+"';");
+		log.info("Successfully deleted");
+	}catch(e) {
+		log.error("Error in Deleting");
+		response.sendRedirect("error.jag");
+		}
+}else if(type=='rma'){
+		try{
+			var st = db.query("delete from user_submits where rma_number='"+value+"';");
+			log.info("Successfully deleted");
+		}catch(e) {
+			log.error("Error in Deleting");
+			response.sendRedirect("error.jag");
+		}
+	}else if(type=='machine'){
+			try{
+				var st = db.query("delete from user_submits where machinenumber='"+value+"';");
+				log.info("Successfully deleted");
+			}catch(e) {
+				log.error("Error in Deleting");
+				response.sendRedirect("error.jag");
+				}
+		}
+response.sendRedirect("home.jag");
+%>

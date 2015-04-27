@@ -1,0 +1,32 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var caramel = require('caramel');
+var dbt = require('modules/dbcon.js');
+var log = new Log();
+var usersess = session.get('login');
+var username = usersess.email;
+var db = new Database("rmadb");
+var verb = request.getMethod();
+if(verb == 'GET'){
+caramel = require('caramel');
+	caramel.render({
+		'title':{text:'Upload csv'},
+		'userheader':{username:username},
+		'sidenav':{},
+		'uploadcsv':{}
+	});
+}else if(verb == 'POST'){
+	var newfilename = request.getFile("csvfilename").getName();
+	var path = "/opt/ff/";
+	var full = path+newfilename;
+	try{
+		var qury = db.query("LOAD DATA LOCAL INFILE '"+full+"' INTO TABLE warrantydate FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED  BY '\"'  LINES TERMINATED BY '\n' IGNORE 1 LINES ;");
+		log.info("file upload success");
+	} catch(e)
+		{
+			log.error("File Not Uploaded");
+			response.sendRedirect("error.jag");
+		}
+}
+%>

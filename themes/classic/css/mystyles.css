@@ -1,0 +1,42 @@
+html,body{
+	height:100%;margin:0% !important;overflow:auto
+}
+header{
+	position:fixed;top:0;height:85px;width:100%;background-color:#0181CC;color:#FFFFFF;z-index:10;margin-left:-15px;padding:0px;
+}
+header #headeruser{
+	font-size:20px;
+	line-height:1.5px;
+	margin-left:50px;
+}
+section, #content{
+	padding-top:85px;padding-bottom:85px;position:fixed;top:0;bottom:0;height:100%;width:100%;min-height:100%;overflow:auto;
+}
+
+nav{
+	height:100%;
+}
+
+footer{
+	position:fixed;bottom:0;height:85px;width:100%;z-index:10;color:#0181CC;margin-left:-15px;padding:0px;
+}
+
+#usertable{
+	margin-left:-5%;
+}
+
+#user_signup_i{
+	margin-left:3%;
+}
+
+.form-control{
+	width:75%;
+}
+
+#user_signup_i .col-md-6{
+	width:40%;
+}
+
+#nexbox{
+	width:75%;
+}

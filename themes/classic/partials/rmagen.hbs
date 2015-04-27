@@ -1,0 +1,65 @@
+<form name="SubmitRMA" action="rmagensub.jag" method="post" id="submitrmai" enctype="multipart/form-data" class="form-horizontal" role="form">
+	<div class="form-group col-md-12">
+		<div class="col-md-6">
+		<label for="firstname">First Name : </label>
+		<input type="text" placeholder="First Name" size="20" name="fname" id="nameid" class="form-control"></input><span class="error" id="errone"></span>
+		</div>
+		<div class="col-md-6">
+		<label for="lastname">Last Name : </label>
+		<input type="text" placeholder="Last Name" size="20" name="lname" id="lnameid" class="form-control"></input><span class="error" id="errlname"></span>
+		</div>
+	</div>
+	<div class="form-group col-md-12">
+		<div class="col-md-6">
+		<label for="machineowner">Machine Owner : </label>
+		<textarea style = "resize:none" readonly id="textareawstatus" rows="1" columns="20" class="form-control" name="ownernm">{{Ownername}}</textarea>
+		</div>
+		<div class="col-md-6">
+		<label for="machinenumber">Machine Number : </label>
+		<textarea style = "resize:none" readonly id="txtareamac" rows="1" columns="20" class="form-control" name="mnum">{{Machinenumber}}</textarea>
+		</div>
+	</div>
+	<div class="form-group col-md-12">
+		<div class="col-md-6">
+		<label for="rmanumber">RMA Number : </label>
+		<textarea style = "resize:none" readonly id="textareawstatus" name="rmaamr" rows="1" columns="20" class="form-control">{{rmanumber}}</textarea>
+		</div>
+		<div class="col-md-6">
+		<label for="priority">Priority : </label>
+		<select class="selectpicker btn dropdown-toggle selectpicker btn-default" id="selectpickerid" data-toggle="dropdown" name="prioritycls" id="prid">
+			<option value="low">Low</option>
+			<option value="med">Medium</option>
+			<option value="high">High</option>
+		</select>
+		</div>
+	</div>
+	<div class="form-group col-md-12">
+		<div class="col-md-6">
+		<label for="warrantydate">Warranty Date : </label>
+		<textarea style = "resize:none" readonly id="textareawdate" rows="1" columns="20" class="form-control" name="wtydt">{{Warrantydate}}</textarea>
+		</div>
+		<div class="col-md-6">
+		<label for="warrantystatus">Warranty Status : </label>
+		<textarea style = "resize:none" readonly id="textareawstatus" rows="1" columns="20" class="form-control" name="wtyst">{{Warrantystatus}}</textarea>
+		</div>
+	</div>
+	<div class="form-group col-md-12">
+		<div class="col-md-6">
+		<label for="email">Email : </label>
+		<input type="text" placeholder="Email" size="20" name="email" id="emid" class="form-control"></input><span class="error" id="erremid"></span>
+		</div>
+	</div>
+	<div class="form-group col-md-12">
+		<div class="col-md-6">
+		<label for="subject">Subject : </label>
+		<input type="text" placeholder="Subject..." size="45" name="subject" id="subid" class="form-control"></input><span class="error" id="errsub"></span>
+		</div>
+	</div>
+	<label for="message" style="margin-left:10px">Message : </label>
+	<div class="form-group col-md-12" style="margin-left:1px;">
+		<textarea  id="txtarea" placeholder="Enter detailed information here" class="" rows="10" cols="56" name="ticketmessage" wrap="physical"></textarea><span class="error" id="errtxt" class="form-control"></span>
+	</div>
+	<div class="form-group col-md-12" style="margin-left:1px;">
+		<button type="button" class="btn btn-default" name="Submit" id="subsub">Submit</button>
+	</div>
+</form>

@@ -1,0 +1,100 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+var log = new Log();
+var db = new Database("rmadb");
+var caramel = require('caramel');
+var dbt = require('modules/dbcon.js');
+var usersess = session.get('login');
+var username = usersess.email;
+var value = request.getParameter('name');
+var type= request.getParameter('type');
+if(type=='company'){
+	try{
+		var st = db.query("select * from user_submits where machineowner='"+value+"';");
+		log.info("Successfully retrieved 2");
+		for(i in st){
+			var rma_number = (st[i].rma_number).toString();
+			var first_name = (st[i].first_name).toString();
+			var last_name = (st[i].last_name).toString();
+			var machineowner = (st[i].machineowner).toString();
+			var machinenumber = (st[i].machinenumber).toString();
+			var warrantydate = (st[i].warrantydate).toString();
+			var warrantystatus = (st[i].warrantystatus).toString();
+			var priority = (st[i].priority).toString();
+			var email = (st[i].email).toString();
+			var subject = (st[i].subject).toString();
+			var message = (st[i].message).toString();
+		}
+	}catch(e){
+		log.error("Error in Retrieving by companyname");
+		response.sendRedirect("error.jag");
+		}
+caramel.render({
+	'title':{},
+	'userheader':{username:username},
+	'sidenav':{},
+	'searchresult':{
+		ufn:first_name, uln:last_name, urn:rma_number, umo:machineowner, umn:machinenumber, uwd:warrantydate, uws:warrantystatus, up:priority, ue:email, us:subject, um:message
+	}
+});
+}else if(type=='machine'){
+		try{
+			var st = db.query("select * from user_submits where machinenumber='"+value+"';");
+			log.info("Successfully retrieved 2");
+			for(i in st){
+				var rma_number = (st[i].rma_number).toString();
+				var first_name = (st[i].first_name).toString();
+				var last_name = (st[i].last_name).toString();
+				var machineowner = (st[i].machineowner).toString();
+				var machinenumber = (st[i].machinenumber).toString();
+				var warrantydate = (st[i].warrantydate).toString();
+				var warrantystatus = (st[i].warrantystatus).toString();
+				var priority = (st[i].priority).toString();
+				var email = (st[i].email).toString();
+				var subject = (st[i].subject).toString();
+				var message = (st[i].message).toString();
+			}
+		}catch(e){
+			log.error("Error in Retrieving by machinenumber");
+			response.sendRedirect("error.jag");
+		}
+caramel.render({
+	'title':{},
+	'userheader':{username:username},
+	'sidenav':{},
+	'searchresult':{
+		ufn:first_name, uln:last_name, urn:rma_number, umo:machineowner, umn:machinenumber, uwd:warrantydate, uws:warrantystatus, up:priority, ue:email, us:subject, um:message
+	}
+});
+}else if(type=='rma'){
+			try{
+				var st = db.query("select * from user_submits where rma_number='"+value+"';");
+				log.info("Successfully retrieved 3");
+				for(i in st){
+						var rma_number = (st[i].rma_number).toString();
+						var first_name = (st[i].first_name).toString();
+						var last_name = (st[i].last_name).toString();
+						var machineowner = (st[i].machineowner).toString();
+						var machinenumber = (st[i].machinenumber).toString();
+						var warrantydate = (st[i].warrantydate).toString();
+						var warrantystatus = (st[i].warrantystatus).toString();
+						var priority = (st[i].priority).toString();
+						var email = (st[i].email).toString();
+						var subject = (st[i].subject).toString();
+						var message = (st[i].message).toString();
+					}
+			}catch(e){
+				log.error("Error in Retrieving by rmanumber");
+				response.sendRedirect("error.jag");
+				}
+caramel.render({
+	'title':{},
+	'userheader':{username:username},
+	'sidenav':{},
+	'searchresult':{
+		ufn:first_name, uln:last_name, urn:rma_number, umo:machineowner, umn:machinenumber, uwd:warrantydate, uws:warrantystatus, up:priority, ue:email, us:subject, um:message
+	}
+});
+}
+%>

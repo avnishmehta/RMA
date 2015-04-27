@@ -1,0 +1,6 @@
+<%
+session.remove('login');
+application.remove('bar');
+session.invalidate();
+response.sendRedirect("login.jag");
+%>

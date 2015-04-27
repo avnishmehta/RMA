@@ -1,0 +1,22 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+	var app = application.get('bar');
+	if(app == null){
+		response.sendRedirect('index.jag');
+	}else if(app!=null){
+		var usersess = session.get('login');
+		var username = usersess.email;
+	}
+
+	var desc = "";
+	var caramel = require('caramel');
+	var verb = request.getMethod();
+
+	caramel.render({
+		'title':{text:'Home'},
+		'userheader':{username:username},
+		'sidenav':{},
+		'main':{text:desc}
+	});
+%>

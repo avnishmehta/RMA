@@ -1,0 +1,34 @@
+<%
+response.addHeader("Cache-Control", "no-cache,no-store,private,must-revalidate,max-stale=0,post-check=0,pre-check=0");
+response.addHeader("Pragma", "no-cache");
+	var frst_name = request.getParameter('fname');
+	var lst_name = request.getParameter('lname');
+	var mac_ow = request.getParameter('maccine');
+	var macnumb = request.getParameter('maccnum');
+	var rmano = request.getParameter('rmar');
+	var prio = request.getParameter('prioritycls');
+	var warrandate = request.getParameter('wd');
+	var warranstat = request.getParameter('ws');
+	var ema = request.getParameter('email');
+	var subt = request.getParameter('subject');
+	var tktmsg = request.getParameter('ticketmessage');
+	var log = new Log();
+	var db = new Database("rmadb");
+	var caramel = require('caramel');
+	var dbt = require('modules/dbcon.js');
+
+var data = "update user_submits set rma_number='"+rmano+"', first_name='"+frst_name+"', last_name='"+lst_name+"', machineowner='"+mac_ow+"', machinenumber='"+macnumb+"', warrantydate='"+warrandate+"', warrantystatus='"+warranstat+"', priority='"+prio+"', email='"+ema+"', subject='"+subt+"', message='"+tktmsg+"' where rma_number='"+rmano+"';";
+	try
+	{
+		db.query(data);
+		log.info("Success");
+	} catch(e)
+		    {
+			    log.error("Error modifying the ticket");
+		    } finally
+			    {
+				    db.close()
+			    }
+
+	response.sendRedirect('home.jag');
+%>
